@@ -6,6 +6,7 @@
     {% if post.image %}
         <img src="{{ post.image.url }}" alt="">
     {% endif %}
+    <h3>view_count : {{ post.view_count }} </h3><br> 
     <h3>작성 시각 : {{ post.created_at }} </h3><br> 
     <a href="{% url 'posts:edit' post.pk %}" class="btn btn-primary">수정하기</a>
     <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">삭제하기</a>
