@@ -5,6 +5,7 @@ def main(request):
     posts = Post.objects.all()
     return render(request, 'posts/main.html')
 
+
 def new(request):
     return render(request, 'posts/new.html')
 
@@ -15,3 +16,8 @@ def create(request):
         content = request.POST.get('content')
         Post.objects.create(title=title, content=content)
         return redirect('main')
+
+
+def show(request, id):
+    post = Post.objects.get(pk = id)
+    return render(request, 'posts/show.html')
