@@ -15,7 +15,8 @@ def create(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         image = request.FILES.get('image')
-        Post.objects.create(title=title, content=content, image=image)
+        files = request.FILES.get('post_file')
+        Post.objects.create(title=title, content=content, image=image, post_file = files)
         return redirect('posts:main')
 
 
@@ -34,7 +35,7 @@ def edit(request, id):
 def update(request, id):
     post = get_object_or_404(Post, pk=id)
     if request.method == "POST":
-        post.title = request.POST['title']
+        post.title = request.data['title']
         post.content = request.POST['content']
         post.image = request.FILES['image']
         post.save()
