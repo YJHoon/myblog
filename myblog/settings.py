@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'introduction',
     'posts',
+    
+    'django.contrib.sites',
+
+    #django-allauth 앱
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -127,5 +134,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myblog', 'media')
 
-# >> 터미널에 명령어 치기
-# pip install pillow
+AUTHENTICATE_BACKENDS = [
+    #django supersuer로 로그인
+    'django.contrib.auth.backends.ModelBackend',
+    # 이메일로 로그인 가능
+    'allauth.account.auth_backends.AuthenticateBackend',
+]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
