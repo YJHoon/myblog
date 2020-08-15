@@ -6,6 +6,8 @@ class PostAdmin(admin.ModelAdmin):
     list_display=(
         'id', 
         'title',
+        'content',
+        'post_type',
         'view_count',
         'created_at'
     )

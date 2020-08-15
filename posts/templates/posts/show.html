@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mt-5">{{ post.title }}</h2>
+    </div>
+    <div class="col-12">
+      <h2>글 제목: {{ post.content }}</h2>
+    </div>
+    <div class="col-12">
+      <h2>글 내용: {{ post.type }}</h2>
+    </div>
+    <div class="col-12">
+      <h2>타입: {{post.post_type}}</h2>
+    </div>
+    <div class="col-12">
+      <h2>조회수: {{post.view_count}}</h2>
+    </div>
+    <div class="col-12">
+      {% if post.image %}
+        이미지: <img src="{{ post.image.url}}" alt="">
+      {% endif %}
+    </div>
+    {% if post.user %}
+      <div class="col-12 mt-3">
+        <a href="{% url 'posts:update' post.pk %}" class="btn btn-warning">수정하기</a>
+        <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">삭제하기</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<div class="container mt-5">
+  <form action="{% url 'posts:create_comment' post.pk %}" method="POST" class="form-row">
+    {% csrf_token %}
+    <textarea class="form-control col-11 mr-2" placeholder="댓글 내용 입력..." name="content"></textarea>
+    <input type="submit" class="btn btn-primary" value="작성하기">
+  </form>
+</div>
+{% endblock %}
