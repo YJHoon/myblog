@@ -2,8 +2,15 @@ from django.db import models
 
 # Create your models here.
 class Post(models.Model):
-    title = models.CharField(max_length=50, null=False)
-    content = models.TextField()
-    view_count = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    POST_TYPES = [
+        (0, '파이썬'),
+        (1, '루비'),
+        (2, '자바'),
+    ]
+    title = models.CharField(max_length=50, null=False, verbose_name = "제목")
+    content = models.TextField(verbose_name = "내용")
+    view_count = models.IntegerField(default=0, verbose_name = "조회수")
+    image = models.ImageField(upload_to='images/', null=True, verbose_name = "이미지")
+    _type = models.PositiveSmallIntegerField(choices=POST_TYPES, verbose_name = "게시글타입")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name = "생성시간")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name = "수정시간")
